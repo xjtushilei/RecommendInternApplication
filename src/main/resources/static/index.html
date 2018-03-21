@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="robots" content="noindex">              <!-- 阻止所有爬虫 -->
+    <meta name="googlerobot" content="noindex">         <!-- 阻止Google收录 -->
+    <title>智能问诊-日志监控</title>
+    <link rel="stylesheet" href="plugs/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="plugs/layui/css/layui.css" media="all">
+</head>
+<body>
+<div id="main">
+    <div class="text-center">
+        <h1 style="font-size: 30px;margin-top: 10px;margin-bottom: 10px">智能问诊-日志监控(医生查看版本)</h1>
+    </div>
+    <div>
+        <table id="table" lay-filter="demoEvent"></table>
+    </div>
+    <!-- 模态框 recommendation -->
+    <div class="modal fade" id="recommendation" tabindex="-1" role="dialog" aria-labelledby="recommendation"
+         aria-hidden="true">
+        <div class="modal-dialog" style="width:80%">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <table class="table">
+                        <caption>多轮问答详情</caption>
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>问题类型</th>
+                            <th>问句</th>
+                            <th>待选择选项</th>
+                            <th>用户输入</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="x in questions">
+                            <td v-text="x.seqno"></td>
+                            <td v-text="x.type"></td>
+                            <td v-text="x.query"></td>
+                            <td v-text="x.choices"></td>
+                            <td v-text="x.choice"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <div style="padding-bottom: 8px">
+                            <h4>推荐结果</h4>
+                        </div>
+                        <pre v-text="recommendation"></pre>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+    </div><!-- /.modal -->
+
+    <!-- 模态框 notes -->
+    <div class="modal fade" id="notes" tabindex="-1" role="dialog" aria-labelledby="notes" aria-hidden="true">
+        <div class="modal-dialog" style="width:70%">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div>
+                        <button type="button" data-toggle="modal" data-target="#addnote" class="btn btn-primary btn-sm">
+                            添加一条新纪录
+                        </button>
+                    </div>
+                    <table class="table">
+                        <caption></caption>
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>问题</th>
+                            <th>姓名</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="x,index in notes">
+                            <td v-text="index"></td>
+                            <td v-text="x.note"></td>
+                            <td v-text="x.name"></td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" v-on:click="deletenote(x.id)">删除</button>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+    </div><!-- /.modal -->
+
+    <!-- 模态框 notes -->
+    <div class="modal fade" id="addnote" tabindex="-1" role="dialog" aria-labelledby="addnote" aria-hidden="true">
+        <div class="modal-dialog" style="width:70%">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>问题描述</label>
+                                <textarea class="form-control" rows="3" placeholder="在这里输入你的建议或者疑问"
+                                          v-model="note"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>提交人</label>
+                                <input type="text" class="form-control" placeholder="jerry" v-model="name">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" v-on:click="addnote">提交
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+    </div><!-- /.modal -->
+</div>
+<script type="text/javascript" src="plugs/vue/vue.v2.1.3.js"></script>
+<script src="plugs/jquery/jquery-2.2.3.min.js"></script>
+<script src="plugs/bootstrap/js/bootstrap.js"></script>
+<script src="plugs/layui/layui.all.js"></script>
+
+
+<script src="js/index.js"></script>
+</body>
+</html>
