@@ -18,5 +18,3 @@ JDK:java1.8
 java  -jar  build/libs/find-job.jar
 
 打开浏览器:输入  ip:8082/swagger-ui.html
-
-提供一个自己部署的，url失效请自行处理。http://aliyun.xjtushilei.com:8082/swagger-ui.html
